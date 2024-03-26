@@ -31,8 +31,6 @@
 
     }
 
-    
-
     function getToken($email){
         
         $conn = getConnection();
@@ -62,6 +60,47 @@
         return $data;
     }
 
+    function createToken($email){
+        $conn = getConnection();
 
+        
+        // Prepare and bind the INSERT statement
+        $stmt = $conn->prepare("INSERT INTO tokens (email, expire_date) VALUES (?, ?)");
+        $stmt->bind_param("ss", $emailAddress, $expireDate);
+
+        // Set parameters and execute
+
+
+        $currentTimestamp = time(); // Get current Unix timestamp
+        $time = date('Y-m-d H:i:s', $currentTimestamp);
+
+
+        $emailAddress = $email;
+        $expireDate = getTokenExpireTime($time);
+        $stmt->execute();
+
+        echo "New record inserted successfully";
+
+        // Close statement and connection
+        $stmt->close();
+        $conn->close();
+    }
+
+    function deleteToken($email){
+        $conn = getConnection();
+
+         // Prepare and bind the INSERT statement
+        $stmt = $conn->prepare("DELETE FROM tokens WHERE email=?");
+        $stmt->bind_param("s", $email);
+
+        $stmt->execute();
+
+        $stmt->close();
+        $conn->close();
+    }
+
+    function addNews($title, $description, $image){
+        
+    }
 
     ?>

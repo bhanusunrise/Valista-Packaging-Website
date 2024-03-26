@@ -33,10 +33,12 @@
         return $conn;
     }
 
-    function getTokenExpireTime($time){
-        $current_time = new DateTime(); // Get the current time
-        $current_time->modify($time.' hour'); // Add 1 hour
-        echo $current_time->format('Y-m-d H:i:s'); // Output the result
+    function getTokenExpireTime(){
+        
+        $currentTimestamp = time();
+        $futureTimestamp = strtotime('+10 hours', $currentTimestamp);
+        $futureDateTime = date('Y-m-d H:i:s', $futureTimestamp);
+        return $futureDateTime;
     }
 
     function getTokenID(){
@@ -51,5 +53,17 @@
         return $tokenID;
     }
 
+    function isTokenExpiretimeOvercame($anotherDateTime){
+        
+        $isExpired = false;
+        $currentDateTime = time();
+        $anotherDateTime;
+
+        if ($currentDateTime < $anotherDateTime) {
+            $isExpired = true;
+        }
+        
+        return $isExpired;
+    }
 
 ?>
