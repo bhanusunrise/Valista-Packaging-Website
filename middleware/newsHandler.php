@@ -2,7 +2,7 @@
 
 include_once("../backend/API.php");
 
-var_dump($_POST);
+//var_dump($_POST);
 $title = $_POST["news-title"];
 $description = $_POST["news-description"];
 $imageName = $_FILES["news-image"];
@@ -15,7 +15,7 @@ if(isset($_POST['add'])){
         if($uploadedImagePath !== false) {
             echo $uploadedImagePath;
             addNews($title, $description, $uploadedImagePath);
-            header('Location: ../dashboard.php');
+            //header('Location: ../dashboard.php');
         } else {
         echo "Sorry, there was an error uploading your file.";
 
