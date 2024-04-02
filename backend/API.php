@@ -135,9 +135,6 @@
         $stmt = $conn->prepare("INSERT INTO updates (Title, Description, Image) VALUES (?, ?, ?)");
         $stmt->bind_param("sss", $title, $description, $image);
 
-        // Set parameters and execute
-        $image = getImageName($image);
-
         $stmt->execute();
 
         echo "New record inserted successfully";

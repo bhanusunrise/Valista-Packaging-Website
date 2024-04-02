@@ -14,6 +14,7 @@ if(isset($_POST['add'])){
          $uploadedImagePath = uploadImage($imageName, $targetDirectory);
         if($uploadedImagePath !== false) {
             echo $uploadedImagePath;
+            addNews($title, $description, $uploadedImagePath);
         } else {
         echo "Sorry, there was an error uploading your file.";
 
