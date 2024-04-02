@@ -127,6 +127,33 @@
         return $data;
     }
 
+    function getAllNews(){
+        $conn = getConnection();
+        $stmt = $conn->prepare("SELECT * FROM updates");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        /*
+        if(!($result->num_rows > 0)){
+            $result = "No tokens found";
+        }*/
+
+        $data = "0 results";
+
+        if ($result->num_rows > 0) {
+            $data = array();
+
+            while($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+
+        }
+        
+        $stmt->close();
+        $conn->close();
+        return $data;
+    }
+
     function addNews($title, $description, $image){
         $conn = getConnection();
 
