@@ -99,8 +99,52 @@
         $conn->close();
     }
 
-    function addNews($title, $description, $image){
+    function getNews($title){
+        $conn = getConnection();
+        $stmt = $conn->prepare("SELECT * FROM updates WHERE title = ?");
+        $stmt->bind_param("s", $title);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        /*
+        if(!($result->num_rows > 0)){
+            $result = "No tokens found";
+        }*/
+
+        $data = "0 results";
+
+        if ($result->num_rows > 0) {
+            $data = array();
+
+            while($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+
+        }
         
+        $stmt->close();
+        $conn->close();
+        return $data;
+    }
+
+    function addNews($title, $description, $image){
+        $conn = getConnection();
+
+        
+        // Prepare and bind the INSERT statement
+        $stmt = $conn->prepare("INSERT INTO updates (Title, Description, Image) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $title, $description, $image);
+
+        // Set parameters and execute
+        $image = getImageName($image);
+
+        $stmt->execute();
+
+        echo "New record inserted successfully";
+
+        // Close statement and connection
+        $stmt->close();
+        $conn->close();
     }
 
     ?>

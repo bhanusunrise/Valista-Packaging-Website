@@ -139,54 +139,83 @@
               </tbody>
             </table>
           </div>
-          <p class="h1 text-white text-center" id="start-form">Updates Setup</p>
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label text-white"
-              >Update Title :
-            </label>
-            <input
-              type="text"
-              class="form-control login-components text-white"
-              id="exampleFormControlInput1"
-              placeholder="Enter the title"
-            />
-          </div>
-          <div class="mb-3">
-            <label
-              for="exampleFormControlTextarea1"
-              class="form-label text-white"
-              >Description :
-            </label>
-            <textarea
-              class="form-control login-components text-white"
-              id="exampleFormControlTextarea1"
-              rows="5"
-              placeholder="Enter the description (max 1000 characters)"
-            ></textarea>
-          </div>
-          <div class="mb-3">
-            <label for="formFile" class="form-label text-white"
-              >Upload your Image :</label
+          <form
+            action="middleware/newsHandler.php"
+            method="POST"
+            enctype="multipart/form-data"
+          >
+            <p class="h1 text-white text-center" id="start-form">
+              Updates Setup
+            </p>
+            <div class="mb-3">
+              <label
+                for="exampleFormControlInput1"
+                class="form-label text-white"
+                >Update Title :</label
+              >
+              <input
+                type="text"
+                class="form-control login-components text-white"
+                id="exampleFormControlInput1"
+                placeholder="Enter the title"
+                name="news-title"
+              />
+            </div>
+            <div class="mb-3">
+              <label
+                for="exampleFormControlTextarea1"
+                class="form-label text-white"
+                >Description :</label
+              >
+              <textarea
+                class="form-control login-components text-white"
+                id="exampleFormControlTextarea1"
+                rows="5"
+                placeholder="Enter the description (max 1000 characters)"
+                name="news-description"
+              ></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="formFile" class="form-label text-white"
+                >Upload your Image :</label
+              >
+              <input
+                class="form-control login-components text-white"
+                type="file"
+                id="formFile"
+                name="news-image"
+                accept="image/*"
+              />
+            </div>
+            <button
+              type="submit"
+              class="btn btn-outline-success login-btn-set"
+              name="add"
             >
-            <input
-              class="form-control login-components text-white"
-              type="file"
-              id="formFile"
-              placeholder="Upload your image"
-            />
-          </div>
-          <button type="Submit" class="btn btn-outline-success login-btn-set">
-            Add Update
-          </button>
-          <button type="Submit" class="btn btn-outline-primary login-btn-set">
-            Change Update
-          </button>
-          <button type="reset" class="btn btn-outline-secondary login-btn-set">
-            Clear Form
-          </button>
-          <button type="Submit" class="btn btn-outline-danger login-btn-set">
-            Delete Update
-          </button>
+              Add Update
+            </button>
+            <button
+              type="submit"
+              class="btn btn-outline-primary login-btn-set"
+              name="update"
+            >
+              Change Update
+            </button>
+            <button
+              type="reset"
+              class="btn btn-outline-secondary login-btn-set"
+              name="clear"
+            >
+              Clear Form
+            </button>
+            <button
+              type="submit"
+              class="btn btn-outline-danger login-btn-set"
+              name="delete"
+            >
+              Delete Update
+            </button>
+          </form>
         </div>
       </div>
     </div>

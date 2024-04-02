@@ -15,7 +15,7 @@
         return $OTP;
     }
 
-    function getImageName(){
+    function getImageName($fileName){
         $fileName =  date("Y-m-d_h-i-sa");
         $randomNumber = rand(000000, 999999);
         $fileName = $fileName."_".$randomNumber;
@@ -65,5 +65,46 @@
         
         return $isExpired;
     }
+
+    function uploadImage($imageData, $targetDirectory) {
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($imageData["name"], PATHINFO_EXTENSION));
+    $newFileName = getImageName($imageData["name"]); // Get the new file name
+    $targetFile = $targetDirectory . $newFileName . '.' . $imageFileType; // Use the new file name with the original extension
+
+    // Check if image file is an actual image or fake image
+    $check = getimagesize($imageData["tmp_name"]);
+    if($check !== false) {
+        $uploadOk = 1;
+    } else {
+        $uploadOk = 0;
+    }
+
+    // Check file size
+    /*
+    if ($imageData["size"] > 500000) {
+        $uploadOk = 0;
+    }*/
+
+    // Allow certain file formats
+    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+    && $imageFileType != "gif" ) {
+        $uploadOk = 0;
+    }
+
+    // Check if $uploadOk is set to 0 by an error
+    if ($uploadOk == 0) {
+        return false;
+    // if everything is ok, try to upload file
+    } else {
+        if (move_uploaded_file($imageData["tmp_name"], $targetFile)) {
+            return $targetFile;
+        } else {
+            return false;
+        }
+    }
+}
+
+
 
 ?>
