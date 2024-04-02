@@ -132,7 +132,7 @@
 
         
         // Prepare and bind the INSERT statement
-        $stmt = $conn->prepare("INSERT INTO updates (Title, Description, Image) VALUES (?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO updates (Title, Description, Image, Featured) VALUES (?, ?, ?, 'No')");
         $stmt->bind_param("sss", $title, $description, $image);
 
         $stmt->execute();
