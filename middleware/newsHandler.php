@@ -15,7 +15,7 @@ if(isset($_POST['add'])){
         if($uploadedImagePath !== false) {
             echo $uploadedImagePath;
             addNews($title, $description, $uploadedImagePath);
-            header('Location: ../dashboard.html');
+            header('Location: ../dashboard.php');
         } else {
         echo "Sorry, there was an error uploading your file.";
 

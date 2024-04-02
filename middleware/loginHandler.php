@@ -23,7 +23,7 @@ if(isset($_POST['sign-in'])) {
             deleteToken($email);
             createToken($email);
         }
-        header('Location: ../dashboard.html');
+        header('Location: ../dashboard.php');
     }
 }else{
     header("Location: ../login.html");
